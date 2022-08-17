@@ -58,8 +58,8 @@ func Execute() {
 }
 
 func init() {
+	viper.AutomaticEnv()
 	cobra.OnInitialize(initConfig)
-
 	rootCmd.Flags().StringVar(&runConfig, "runConfig", "", "run configuration (replaces global configuration)")
 	rootCmd.Flags().Bool(config.ShowAllConstraintsKey, false, "show all constraints, even though the table of the resulting constraint was not selected")
 	rootCmd.Flags().Bool(config.UseAllTablesKey, false, "use all available tables")
@@ -70,7 +70,6 @@ func init() {
 	rootCmd.Flags().StringP(config.SchemaKey, "s", "", "schema that should be used")
 	rootCmd.Flags().StringP(config.OutputFileNameKey, "o", "result.mmd", "output file name")
 	rootCmd.Flags().StringSlice(config.SelectedTablesKey, []string{""}, "tables to include")
-
 	bindFlagToViper(config.ShowAllConstraintsKey)
 	bindFlagToViper(config.UseAllTablesKey)
 	bindFlagToViper(config.DebugKey)

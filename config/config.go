@@ -1,6 +1,10 @@
 package config
 
-import "github.com/spf13/viper"
+import (
+	"fmt"
+
+	"github.com/spf13/viper"
+)
 
 const (
 	ShowAllConstraintsKey          = "showAllConstraints"
@@ -8,6 +12,11 @@ const (
 	SelectedTablesKey              = "selectedTables"
 	SchemaKey                      = "schema"
 	ConnectionStringKey            = "connectionString"
+	DB_USER												 = "db_user"
+	DB_PASSWORD										 = "db_password"
+	DB_PORT												 = "db_port"
+	DB_NAME												 = "db_name"
+	environmentVariables           = "environmentVariables"
 	ConnectionStringSuggestionsKey = "connectionStringSuggestions"
 	OutputFileNameKey              = "outputFileName"
 	EncloseWithMermaidBackticksKey = "encloseWithMermaidBackticks"
@@ -47,7 +56,26 @@ func (c config) Schema() string {
 }
 
 func (c config) ConnectionString() string {
-	return viper.GetString(ConnectionStringKey)
+
+	// return viper.GetString(ConnectionStringKey)
+
+	var environment = viper.GetBool(environmentVariables)
+
+	var connectionString = ""
+
+	if environment {
+
+		var port = viper.Get(DB_PORT)
+		var portString = fmt.Sprintf("%v", port)
+
+		connectionString = "postgresql://" + viper.Get(DB_USER).(string) + ":" + viper.Get(DB_PASSWORD).(string) + "@host.docker.internal" + ":" + portString + "/" + viper.Get(DB_NAME).(string)
+	} else {
+		connectionString = "postgresql://" + viper.GetString(DB_USER) + ":" + viper.GetString(DB_PASSWORD) + "@localhost" + ":" + viper.GetString(DB_PORT) + "/" + viper.GetString(DB_NAME)
+	}
+	// print line
+	fmt.Println(connectionString)
+
+	return connectionString
 }
 
 func (c config) OutputFileName() string {

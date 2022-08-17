@@ -1,0 +1,22 @@
+# Connection properties
+environmentVariables: true
+# connectionString: 'postgresql://quiverx:quiverx@localhost:5432/quiverx'
+# db_user: 'quiverx'
+# db_password: 'quiverx'
+# db_host: 'localhost'
+# db_port: 5432
+# db_name: 'quiverx'
+
+schema: 'public'
+# Define what tables should be used
+useAllTables: true
+# selectedTables:
+#   - article
+#   - label
+
+# Additional flags
+showAllConstraints: true
+outputFileName: 'db-erd.mmd'
+encloseWithMermaidBackticks: false
+debug: false
+omitConstraintLabels: false
