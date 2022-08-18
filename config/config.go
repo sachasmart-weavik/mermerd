@@ -56,11 +56,7 @@ func (c config) Schema() string {
 }
 
 func (c config) ConnectionString() string {
-
-	// return viper.GetString(ConnectionStringKey)
-
 	var environment = viper.GetBool(environmentVariables)
-
 	var connectionString = ""
 
 	if environment {
@@ -70,11 +66,8 @@ func (c config) ConnectionString() string {
 
 		connectionString = "postgresql://" + viper.Get(DB_USER).(string) + ":" + viper.Get(DB_PASSWORD).(string) + "@host.docker.internal" + ":" + portString + "/" + viper.Get(DB_NAME).(string)
 	} else {
-		connectionString = "postgresql://" + viper.GetString(DB_USER) + ":" + viper.GetString(DB_PASSWORD) + "@localhost" + ":" + viper.GetString(DB_PORT) + "/" + viper.GetString(DB_NAME)
+		return viper.GetString(ConnectionStringKey)
 	}
-	// print line
-	fmt.Println(connectionString)
-
 	return connectionString
 }
 
