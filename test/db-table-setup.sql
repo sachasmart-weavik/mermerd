@@ -45,7 +45,7 @@ alter table article_label
 alter table article_label
     add primary key (article_id, label_id);
 
--- Test case for https://github.com/KarnerTh/mermerd/issues/8
+-- Test case for https://github.com/sachasmart-weavik/mermerd/issues/8
 CREATE TABLE test_1_a
 (
     id  int,

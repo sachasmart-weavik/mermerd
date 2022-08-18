@@ -2,11 +2,12 @@ package analyzer
 
 import (
 	"errors"
+
 	"github.com/sirupsen/logrus"
 
-	"github.com/KarnerTh/mermerd/config"
-	"github.com/KarnerTh/mermerd/database"
-	"github.com/KarnerTh/mermerd/util"
+	"github.com/sachasmart-weavik/mermerd/config"
+	"github.com/sachasmart-weavik/mermerd/database"
+	"github.com/sachasmart-weavik/mermerd/util"
 )
 
 type analyzer struct {

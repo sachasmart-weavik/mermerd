@@ -7,8 +7,8 @@ import (
 
 	"github.com/sirupsen/logrus"
 
-	"github.com/KarnerTh/mermerd/config"
-	"github.com/KarnerTh/mermerd/database"
+	"github.com/sachasmart-weavik/mermerd/config"
+	"github.com/sachasmart-weavik/mermerd/database"
 )
 
 //go:embed erd_template.gommd

@@ -22,4 +22,4 @@ test-unit:
 
 .PHONY: publish-package
 publish-package:
-	GOPROXY=proxy.golang.org go list -m github.com/KarnerTh/mermerd@$(GIT_TAG)
+	GOPROXY=proxy.golang.org go list -m github.com/sachasmart-weavik/mermerd@$(GIT_TAG)

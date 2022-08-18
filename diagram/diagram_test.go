@@ -6,7 +6,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/KarnerTh/mermerd/database"
+	"github.com/sachasmart-weavik/mermerd/database"
 )
 
 func TestGetRelation(t *testing.T) {

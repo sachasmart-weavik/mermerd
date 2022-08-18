@@ -1,4 +1,4 @@
-module github.com/KarnerTh/mermerd
+module github.com/sachasmart-weavik/mermerd
 
 go 1.18
 
