@@ -1,0 +1,15 @@
+# Connection properties
+connectionString: "postgresql://${DB_USER}:${DB_PASSWORD}@{DB_HOST}:${DB_PORT}/${DB_NAME}"
+# connectionString: "postgresql://admin:password@localhost:5432/weavik_data"
+schema: "${DB_SCHEMA}"
+
+# Define what tables should be used
+useAllTables: true
+
+# Additional flags
+showAllConstraints: true
+outputFileName: "dbERD.mmd"
+encloseWithMermaidBackticks: false
+debug: true
+omitConstraintLabels: false
+omitAttributeKeys: false

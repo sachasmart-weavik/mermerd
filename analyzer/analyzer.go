@@ -19,7 +19,6 @@ type analyzer struct {
 
 type Analyzer interface {
 	Analyze() (*database.Result, error)
-
 	GetConnectionString() (string, error)
 	GetSchema(db database.Connector) (string, error)
 	GetTables(db database.Connector, selectedSchema string) ([]string, error)
@@ -145,7 +144,6 @@ func (a analyzer) GetColumnsAndConstraints(db database.Connector, selectedTables
 	logrus.WithFields(logrus.Fields{"columns": columnCount, "constraints": constraintCount}).Info("Got columns and constraints")
 	return tableResults, nil
 }
-
 func getTableResultStats(tableResults []database.TableResult) (columnCount int, constraintCount int) {
 	for _, tableResult := range tableResults {
 		columnCount += len(tableResult.Columns)

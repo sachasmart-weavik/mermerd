@@ -164,4 +164,5 @@ func (c *mySqlConnector) GetConstraints(tableName string) ([]ConstraintResult, e
 	}
 
 	return constraints, nil
+
 }

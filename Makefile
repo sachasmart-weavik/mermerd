@@ -23,3 +23,8 @@ test-unit:
 .PHONY: publish-package
 publish-package:
 	GOPROXY=proxy.golang.org go list -m github.com/KarnerTh/mermerd@$(GIT_TAG)
+
+
+
+erd: 
+	find . -name "*.mmd" -exec mmdc -s 5 -i {} -o {}.png \;
