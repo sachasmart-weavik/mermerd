@@ -1,3 +1,47 @@
+
+## Weavik ECR Image 
+AWS Image: `522507079211.dkr.ecr.us-east-1.amazonaws.com/mermerd:latest`
+
+```docker-compose
+version: '3.7'
+services:
+  mermerd:
+    image: 522507079211.dkr.ecr.us-east-1.amazonaws.com/mermerd:latest
+    container_name: mermerd
+    command: sh ./erd.sh
+    env_file:
+      - .env //change to the .env file with your db credentials
+    environment:
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
+      - DB_PORT=${DB_PORT:-5432}
+      - DB_HOST=${DB_HOST:-localhost}
+      - DB_SCHEMA=${DB_SCHEMA:-public}
+    volumes:
+      - ./erd-shared:/shared:rw
+    network_mode: "host"  
+  mermaid:
+    image: 'minlag/mermaid-cli'
+    container_name: 'mermaid'
+    volumes:
+      - ./erd-shared:/shared/:rw
+    command: 'mermaid -s 10 -i /shared/dbERD.mmd --output /shared/dbERD.png'
+    privileged: true
+    user: 'root'
+    depends_on:
+      mermerd:
+        condition: service_completed_successfully
+
+volumes:
+  erd-shared:
+    external: true
+```
+*Important: change the 
+
+*Note: The `erd-shared` folder will be created in the directory of the `docker-compose.yaml` file. The `docker-compose stack` will output a [`.mmd`](https://www.google.com/search?q=mermaidjs&oq=mermaidjs&aqs=chrome..69i57j69i59l2j69i60.4570j0j9&sourceid=chrome&ie=UTF-8) and a `.png` file of the ERD diagram.*
+
+
 # Mermerd
 [![tests](https://github.com/KarnerTh/mermerd/actions/workflows/test.yml/badge.svg)](https://github.com/KarnerTh/mermerd/actions/workflows/test.yml)
 
@@ -8,6 +52,7 @@ the [Changelog](https://github.com/KarnerTh/mermerd/blob/master/changelog.md)
 
 # Contents
 <ul>
+  <li><a href="#aws">Amazon ECR</a></li>
   <li><a href="#installation">Installation</a></li>
   <li><a href="#features">Features</a></li>
   <li><a href="#why-would-i-need-it--why-should-i-care">Why would I need it / Why should I care?</a></li>
@@ -22,6 +67,7 @@ the [Changelog](https://github.com/KarnerTh/mermerd/blob/master/changelog.md)
   <li><a href="#tests">Tests</a></li>
   <li><a href="#roadmap">Roadmap</a></li>
 </ul>
+
 
 ## Installation
 ```sh
